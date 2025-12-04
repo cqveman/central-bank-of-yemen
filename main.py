@@ -123,9 +123,11 @@ while True:
 
         while True:
             if ' ' not in password:
-                if len(password) >= 8:
-                    break
-            password = input('Invalid Password. Length must be 8 and higher without spaces, try again:\n')
+                if any(char.isdigit() for char in password):
+                    if len(password) >= 8:
+                        break
+            password = input('Invalid Password. must be at least 8 characters long, '
+                             'contain at least one number, and include no spaces.\nTry again: ')
 
     elif choice == 'login':
         ...
