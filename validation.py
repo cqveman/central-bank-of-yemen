@@ -69,7 +69,6 @@ def usernameValidator(username, users):
         if user.get("username") == username:
             return False
 
-    print('Username Available ✔')
     return True
 
 def passwordValidator(password):
