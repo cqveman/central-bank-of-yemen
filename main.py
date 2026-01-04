@@ -1,11 +1,11 @@
 import os
 
-from validation import *
-from utils import *
+from util.validators import *
+from util.helpers import *
 
 users = []
 
-fileName = 'users.json'
+fileName = 'data/users.json'
 if os.path.exists(fileName) and os.path.getsize(fileName) > 2:
     with open(fileName, 'r') as f:
         users = json.load(f)
