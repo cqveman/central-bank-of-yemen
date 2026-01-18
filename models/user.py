@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+from models.account import Account
+
 
 @dataclass(frozen=True)
 class User:
@@ -13,5 +15,5 @@ class User:
     phone_number: str
     email: str
     password_hash: str
-    accounts: list
+    accounts: list[Account]
     is_active: bool = True

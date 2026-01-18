@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
+from models.transaction import Transaction
+
 
 @dataclass
 class Account:
@@ -11,4 +13,4 @@ class Account:
     balance: Decimal
     currency: str
     created_at: datetime
-    transactions: list
+    transactions: list[Transaction]
