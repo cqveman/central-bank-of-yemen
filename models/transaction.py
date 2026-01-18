@@ -5,8 +5,8 @@ from decimal import Decimal
 
 @dataclass
 class Transaction:
-    transaction_id: int
-    account_id: int
+    transaction_id: str
+    account_id: str
     amount: Decimal
     currency: str
     transaction_type: str

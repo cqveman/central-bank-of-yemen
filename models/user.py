@@ -6,7 +6,7 @@ from models.account import Account
 
 @dataclass(frozen=True)
 class User:
-    user_id: int
+    user_id: str
     username: str
     legal_name: str
     date_of_birth: datetime

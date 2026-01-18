@@ -7,8 +7,8 @@ from models.transaction import Transaction
 
 @dataclass
 class Account:
-    account_id: int
-    user_id: int
+    account_id: str
+    user_id: str
     account_type: str
     balance: Decimal
     currency: str
