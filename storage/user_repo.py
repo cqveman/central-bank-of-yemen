@@ -10,9 +10,11 @@ class UserRepo:
         self.users = self.load_users()
 
     def load_users(self):
-        # if os.path.exists(UserRepo.USERS_PATH) and os.path.getsize(UserRepo.USERS_PATH) > 2:
-        with open(UserRepo.USERS_PATH, 'r') as f:
-            return json.load(f)
+        try:
+            with open(UserRepo.USERS_PATH, 'r') as f:
+                return json.load(f)
+        except Exception:
+            return []
 
     def save_users(self):
         with open(UserRepo.USERS_PATH, 'w') as f:
