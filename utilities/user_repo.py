@@ -9,7 +9,7 @@ from models.user import User
 
 
 class UserRepo:
-    USERS_PATH = '../data/users.json'
+    USERS_PATH = './data/users.json'
 
     def __init__(self):
         self.users = self.load_users()
