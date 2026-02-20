@@ -1,3 +1,4 @@
+import hashlib
 import re
 import uuid
 from datetime import datetime
@@ -14,7 +15,7 @@ class UserService:
 
     def create_user(self, username, legal_name, date_of_birth,
                     gender, address, phone_number,
-                    email, password_hash):
+                    email, password):
 
         # Checking username uniqueness
         if any(user.username == username for user in self._user_repo.users):
@@ -39,6 +40,9 @@ class UserService:
         email_regex = r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
         if not re.match(email_regex, email):
             return False
+
+        # Hashing user's password
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
 
         user_id = str(uuid.uuid4())
 
