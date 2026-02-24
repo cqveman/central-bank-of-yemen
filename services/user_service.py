@@ -26,6 +26,7 @@ class UserService:
             return False
 
         # Checking user's age
+        date_of_birth = datetime.strptime(date_of_birth, '%Y-%m-%d')
         today = datetime.today()
         age = (today.year - date_of_birth.year -
                ((today.month, today.day) < (date_of_birth.month, date_of_birth.day,)))  # If True -> 1, False -> 0
