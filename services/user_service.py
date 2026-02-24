@@ -1,4 +1,3 @@
-import hashlib
 import re
 import uuid
 from datetime import datetime
@@ -6,12 +5,14 @@ from datetime import datetime
 from models.user import User
 from services.account_service import AccountService
 from utilities.user_repo import UserRepo
+from utilities.utils import hash_password, verify_password
 
 
 class UserService:
     def __init__(self, user_repo: UserRepo, account_service: AccountService):
         self._user_repo = user_repo
         self._account_service = account_service
+        self.current_user = None
 
     def create_user(self, username, legal_name, date_of_birth,
                     gender, address, phone_number,
@@ -42,9 +43,6 @@ class UserService:
         if not re.match(email_regex, email):
             return False
 
-        # Hashing user's password
-        password_hash = hashlib.sha256(password.encode()).hexdigest()
-
         user_id = str(uuid.uuid4())
 
         user = User(
@@ -56,9 +54,21 @@ class UserService:
             address,
             phone_number,
             email,
-            password_hash,
+            hash_password(password),
             self._account_service.open_account(user_id, 'checking', 'YER')
         )
 
         self._user_repo.add_user(user)
+        return True
+
+    def login(self, username, password):
+        user = self._user_repo.get_user_by(username)
+
+        if user is None:
+            return False
+
+        if not verify_password(password, user.password_hash):
+            return False
+
+        self.current_user = user
         return True

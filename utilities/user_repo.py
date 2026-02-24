@@ -14,6 +14,12 @@ class UserRepo:
     def __init__(self):
         self.users = self.load_users()
 
+    def get_user_by(self, username):
+        for user in self.users:
+            if user.username == username:
+                return user
+        return None
+
     def add_user(self, user):
         self.users.append(user)
         self.save_users()
