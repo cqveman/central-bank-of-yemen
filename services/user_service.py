@@ -55,7 +55,7 @@ class UserService:
             phone_number,
             email,
             hash_password(password),
-            self._account_service.open_account(user_id, 'checking', 'YER')
+            [self._account_service.open_account(user_id, 'checking', 'YER')]
         )
 
         self._user_repo.add_user(user)

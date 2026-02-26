@@ -10,7 +10,7 @@ from utilities.utils import AccountType
 class AccountService:
     def __init__(self, user_repo: UserRepo):
         self._user_repo = user_repo
-        self.accounts = []
+        # self.accounts = []
 
     def open_account(self, user_id, account_type, currency):
         # Checking account's type
@@ -30,5 +30,5 @@ class AccountService:
             []
         )
 
-        self.accounts.append(account)
-        return self.accounts
+        # self.accounts.append(account)
+        return account
