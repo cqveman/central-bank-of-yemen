@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from models.account import Account
+from central_bank_of_yemen.models.account import Account
 
 
 @dataclass(frozen=True)

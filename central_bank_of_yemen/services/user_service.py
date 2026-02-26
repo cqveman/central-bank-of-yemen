@@ -2,10 +2,10 @@ import re
 import uuid
 from datetime import datetime
 
-from models.user import User
-from services.account_service import AccountService
-from utilities.user_repo import UserRepo
-from utilities.utils import hash_password, verify_password
+from central_bank_of_yemen.models.user import User
+from central_bank_of_yemen.services.account_service import AccountService
+from central_bank_of_yemen.utilities.user_repo import UserRepo
+from central_bank_of_yemen.utilities.utils import hash_password, verify_password
 
 
 class UserService:

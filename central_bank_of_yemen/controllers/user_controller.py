@@ -1,4 +1,4 @@
-from services.user_service import UserService
+from central_bank_of_yemen.services.user_service import UserService
 
 
 class UserController:

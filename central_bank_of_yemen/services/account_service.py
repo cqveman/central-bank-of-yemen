@@ -2,9 +2,9 @@ import uuid
 from datetime import datetime
 from decimal import Decimal
 
-from models.account import Account
-from utilities.user_repo import UserRepo
-from utilities.utils import AccountType
+from central_bank_of_yemen.models.account import Account
+from central_bank_of_yemen.utilities.user_repo import UserRepo
+from central_bank_of_yemen.utilities.utils import AccountType
 
 
 class AccountService:

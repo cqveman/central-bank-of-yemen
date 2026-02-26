@@ -3,9 +3,9 @@ from datetime import datetime
 from decimal import Decimal
 from json import JSONDecodeError
 
-from models.account import Account
-from models.transaction import Transaction
-from models.user import User
+from central_bank_of_yemen.models.account import Account
+from central_bank_of_yemen.models.transaction import Transaction
+from central_bank_of_yemen.models.user import User
 
 
 class UserRepo:

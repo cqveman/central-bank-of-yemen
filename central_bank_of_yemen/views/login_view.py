@@ -1,6 +1,6 @@
 import ttkbootstrap as tb
 
-from views.b_form_view import BuildForm
+from central_bank_of_yemen.views.b_form_view import BuildForm
 
 
 class LoginView(BuildForm):

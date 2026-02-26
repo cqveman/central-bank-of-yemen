@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
-from models.transaction import Transaction
-from utilities.utils import AccountType
+from central_bank_of_yemen.models.transaction import Transaction
+from central_bank_of_yemen.utilities.utils import AccountType
 
 
 @dataclass

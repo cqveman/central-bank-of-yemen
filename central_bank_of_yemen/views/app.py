@@ -1,9 +1,8 @@
 import ttkbootstrap as tb
-from ttkbootstrap import Frame
 
-from controllers.user_controller import UserController
-from views.login_view import LoginView
-from views.register_view import RegisterView
+from central_bank_of_yemen.controllers.user_controller import UserController
+from central_bank_of_yemen.views.login_view import LoginView
+from central_bank_of_yemen.views.register_view import RegisterView
 
 
 class App(tb.Window):
@@ -15,7 +14,7 @@ class App(tb.Window):
         self.user_controller = UserController(self, user_service)
         self.frames = {}
 
-        self.iconbitmap('./app.ico')
+        self.iconbitmap('../app.ico')
         self.title('Central Bank of Yemen')
 
         self.center_window()
