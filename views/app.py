@@ -1,7 +1,8 @@
 import ttkbootstrap as tb
-import tkinter as tk
+from ttkbootstrap import Frame
 
 from controllers.user_controller import UserController
+from views.login_view import LoginView
 from views.register_view import RegisterView
 
 
@@ -12,6 +13,7 @@ class App(tb.Window):
     def __init__(self, user_service):
         super().__init__()
         self.user_controller = UserController(self, user_service)
+        self.frames = {}
 
         self.iconbitmap('./app.ico')
         self.title('Central Bank of Yemen')
@@ -19,15 +21,22 @@ class App(tb.Window):
         self.center_window()
         self.minsize(App.WIDTH, App.HEIGHT)
 
-        self.main = tb.Frame(self)
-        self.main.pack(fill="both", expand=True, padx=50, pady=25)
+        container = tb.Frame(self)
+        container.pack(fill="both", expand=True, padx=50, pady=25)
 
-        self.view_register()
+        self.switcher(container)
 
-    def view_register(self):
-        for item in self.main.winfo_children():
-            item.destroy()
-        RegisterView(self.main, self)
+    def switcher(self, container: Frame):
+        for F in (RegisterView, LoginView,):
+            class_name = F.__name__
+            frame = F(container, self)
+            self.frames[class_name] = frame
+            frame.pack(fill="both", expand=True)
+
+        self.show_frame('RegisterView')
+
+    def show_frame(self, class_frame_name):
+        self.frames[class_frame_name].tkraise()
 
     def center_window(self):
         screen_width = self.winfo_screenwidth()

@@ -11,7 +11,7 @@ class RegisterView(tb.Frame):
         super().__init__(parent)
         self.app = app
 
-        self.pack(fill="both", expand=True)
+        # self.pack(fill="both", expand=True)
 
         self.build_header()
         self.build_form()
@@ -141,13 +141,11 @@ class RegisterView(tb.Frame):
     def get_form_data(self):
         return {
             "username": self.username.get(),
-            "first_name": self.first_name.get(),
-            "middle_name": self.middle_name.get(),
-            "last_name": self.last_name.get(),
-            "dob": self.dob.get(),
+            "legal_name": f'{self.first_name.get()} {self.middle_name.get()} {self.last_name.get()}',
+            "date_of_birth": self.dob.get(),
             "gender": self.gender.get(),
             "address": self.address.get(),
-            "phone": self.phone.get(),
+            "phone_number": self.phone.get(),
             "email": self.email.get(),
             "password": self.password.get(),
         }
