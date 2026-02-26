@@ -22,3 +22,11 @@ class UserController:
 
         print('Created user successfully!' if user is True
               else "Error when creating user.")
+
+    def on_login_clicked(self):
+        data = self.app.frames['LoginView'].get_form_data()
+
+        is_he_logged, user = self.user_service.login(data['username'], data['password'])
+
+        print(f'Welcome back {user.legal_name}!' if is_he_logged
+              else "Username or password is incorrect.")

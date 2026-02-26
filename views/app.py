@@ -23,15 +23,14 @@ class App(tb.Window):
 
         container = tb.Frame(self)
         container.pack(fill="both", expand=True, padx=50, pady=25)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
-        self.switcher(container)
-
-    def switcher(self, container: Frame):
         for F in (RegisterView, LoginView,):
             class_name = F.__name__
             frame = F(container, self)
             self.frames[class_name] = frame
-            frame.pack(fill="both", expand=True)
+            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame('RegisterView')
 

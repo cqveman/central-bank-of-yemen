@@ -65,10 +65,10 @@ class UserService:
         user = self._user_repo.get_user_by(username)
 
         if user is None:
-            return False
+            return False, self.current_user
 
         if not verify_password(password, user.password_hash):
-            return False
+            return False, self.current_user
 
         self.current_user = user
-        return True
+        return True, self.current_user
