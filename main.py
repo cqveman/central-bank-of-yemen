@@ -1,6 +1,3 @@
-from datetime import datetime
-
-from controllers.user_controller import UserController
 from services.account_service import AccountService
 from services.user_service import UserService
 from utilities.user_repo import UserRepo

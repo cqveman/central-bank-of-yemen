@@ -8,7 +8,7 @@ from views.register_view import RegisterView
 
 class App(tb.Window):
     WIDTH = 800
-    HEIGHT = 840
+    HEIGHT = 950
 
     def __init__(self, user_service):
         super().__init__()
@@ -44,4 +44,4 @@ class App(tb.Window):
         left = int(screen_width / 2 - App.WIDTH / 2)
         top = int(screen_height / 2 - App.HEIGHT / 2)
 
-        self.geometry(f"{App.WIDTH}x{App.HEIGHT}+{left}+{top}")
+        self.geometry(f"{App.WIDTH}x{App.HEIGHT}+{left}+{top-50}")

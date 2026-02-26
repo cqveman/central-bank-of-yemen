@@ -1,58 +1,35 @@
 import ttkbootstrap as tb
 
+from views.b_form_view import BuildForm
 
-class LoginView(tb.Frame):
-    NEW_FIELD_PADDING = 12
-    LABEL_FONT = ("Ubuntu", 12)
-    SMALL_FONT = ("Ubuntu", 8)
+
+class LoginView(BuildForm):
 
     def __init__(self, parent, app):
-        super().__init__(parent)
-        self.app = app
-
-        self.build_form()
-
-    def build_form(self):
-        self.form_frame = tb.Frame(self)
-        self.form_frame.pack()
-
-        self.build_username()
-        self.build_password()
-        self.build_buttons()
-
-    def build_username(self):
-        frame = tb.Frame(self.form_frame)
-
-        frame.pack(fill="x", pady=LoginView.NEW_FIELD_PADDING)
-        frame.columnconfigure(0, weight=1)
-        frame.rowconfigure((0, 1), weight=1)
+        super().__init__(parent, app, title="Login")
 
         self.username = tb.StringVar()
-
-        tb.Label(frame, text="Username", font=LoginView.LABEL_FONT).grid(row=0, column=0, sticky="w")
-        tb.Entry(frame, textvariable=self.username).grid(row=1, column=0, sticky="ew")
-
-    def build_password(self):
-        frame = tb.Frame(self.form_frame)
-
-        frame.pack(fill="x", pady=LoginView.NEW_FIELD_PADDING)
-        frame.columnconfigure(0, weight=1)
-        frame.rowconfigure((0, 1), weight=1)
-
         self.password = tb.StringVar()
 
-        tb.Label(frame, text="Password", font=LoginView.LABEL_FONT).grid(row=0, column=1, sticky="w")
-        tb.Entry(frame, textvariable=self.password, show="*").grid(row=1, column=1, sticky="ew")
+        self.build_field("Username", self.username)
+        self.build_field("Password", self.password, show="*")
 
-    def build_buttons(self):
         tb.Button(
-            self.form_frame,
-            text="Log in",
+            self.card,
+            text="Login",
+            bootstyle="primary",
             command=self.app.user_controller.on_login_clicked
-        ).pack(pady=LoginView.NEW_FIELD_PADDING)
+        ).pack(fill="x", pady=(25, 8))
+
+        tb.Button(
+            self.card,
+            text="Create new account",
+            bootstyle="link",
+            command=lambda: self.app.show_frame("RegisterView")
+        ).pack()
 
     def get_form_data(self):
         return {
-            "username": self.username.get(),
+            "username": self.username.get().strip(),
             "password": self.password.get(),
         }
