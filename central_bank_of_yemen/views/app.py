@@ -1,6 +1,6 @@
 import ttkbootstrap as tb
 
-from central_bank_of_yemen.controllers.auth_controller import AuthController
+from central_bank_of_yemen.controllers.app_controller import AppController
 from central_bank_of_yemen.views.login_view import LoginView
 from central_bank_of_yemen.views.register_view import RegisterView
 from central_bank_of_yemen.views.user_dashboard_view import UserDashboardView
@@ -11,9 +11,9 @@ class App(tb.Window):
     HEIGHT = 950
     VIEWS = (RegisterView, LoginView, UserDashboardView)
 
-    def __init__(self, user_service):
+    def __init__(self):
         super().__init__()
-        self.auth_controller = AuthController(self, user_service)
+        self.controller = AppController(self)
         self.frames = {}
 
         self.iconbitmap('../app.ico')
@@ -45,4 +45,4 @@ class App(tb.Window):
         left = int(screen_width / 2 - App.WIDTH / 2)
         top = int(screen_height / 2 - App.HEIGHT / 2)
 
-        self.geometry(f"{App.WIDTH}x{App.HEIGHT}+{left}+{top-50}")
+        self.geometry(f"{App.WIDTH}x{App.HEIGHT}+{left}+{top - 50}")

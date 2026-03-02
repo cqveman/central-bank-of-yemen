@@ -55,7 +55,7 @@ class RegisterView(BuildForm):
             self.card,
             text="Register",
             bootstyle="success",
-            command=self.app.auth_controller.on_register_clicked
+            command=self.app.controller.auth.on_register_clicked
         ).pack(fill="x", pady=(25, 8))
 
         tb.Button(
