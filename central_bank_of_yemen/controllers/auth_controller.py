@@ -8,7 +8,7 @@ class AuthController:
         self.__logged_user = None
 
     def on_register_clicked(self):
-        data = self.app.frames['RegisterView'].get_form_data()
+        data = self.app.views['RegisterView'].get_form_data()
 
         user = self.user_service.create_user(
             username=data['username'],
@@ -23,17 +23,17 @@ class AuthController:
 
         print('Created user successfully!' if user is True
               else "Error when creating user.")
-        self.app.show_frame('LoginView')
+        self.app.show_view('LoginView')
 
     def on_login_clicked(self):
-        data = self.app.frames['LoginView'].get_form_data()
+        data = self.app.views['LoginView'].get_form_data()
 
         is_logged = self.user_service.login(data['username'], data['password'])
         current_user = self.user_service.get_current_user()
 
         if is_logged is True and current_user is not None:
             self.__logged_user = current_user
-            self.app.show_frame('UserDashboardView')
+            self.app.show_view('UserDashboardView')
             return
 
         print('ERROR OCCURRED')

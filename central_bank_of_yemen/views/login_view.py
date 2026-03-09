@@ -1,32 +1,52 @@
-import ttkbootstrap as tb
+import customtkinter as ct
 
-from central_bank_of_yemen.views.build_form import BuildForm
+from central_bank_of_yemen.views.widgets.button import Button
+from central_bank_of_yemen.views.widgets.form_field import FormField
 
 
-class LoginView(BuildForm):
+class LoginView(ct.CTkFrame):
 
     def __init__(self, parent, app):
-        super().__init__(parent, app, title="Login")
+        super().__init__(parent, fg_color='transparent')
+        self.app = app
 
-        self.username = tb.StringVar()
-        self.password = tb.StringVar()
+        # To make 'frame' stretch horizontally and stays in the middle of the page
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1, uniform='a')
+        self.rowconfigure(1, weight=3, uniform='a')
 
-        self.build_field("Username", self.username)
-        self.build_field("Password", self.password, show="*")
+        self.build_header()
 
-        tb.Button(
-            self.card,
-            text="Login",
-            bootstyle="primary",
-            command=self.app.controller.auth.on_login_clicked
-        ).pack(fill="x", pady=(25, 8))
+        self.username = ct.StringVar()
+        self.password = ct.StringVar()
 
-        tb.Button(
-            self.card,
-            text="Create new account",
-            bootstyle="link",
-            command=lambda: self.app.show_frame("RegisterView")
-        ).pack()
+        self.build_form()
+
+    def build_header(self):
+        header_frame = ct.CTkFrame(self, fg_color='transparent')
+        header_frame.grid(row=0, column=0, sticky='nsew')
+
+        header_frame.columnconfigure(0, weight=1)
+        header_frame.rowconfigure((0, 1), weight=1)
+
+        ct.CTkLabel(header_frame, text='Central Bank of Yemen', font=('Ubuntu', 28, 'bold')) \
+            .grid(row=0, column=0)
+        ct.CTkLabel(header_frame, text='Login', font=('Ubuntu', 22)) \
+            .grid(row=0, rowspan=2, column=0)
+
+    def build_form(self):
+        form_frame = ct.CTkFrame(self, fg_color='transparent')
+        form_frame.grid(row=1, column=0, sticky='nsew')
+
+        # For the form content
+        form_frame.columnconfigure(0, weight=1)
+        form_frame.rowconfigure((0, 1, 2, 3), weight=1, uniform='a')
+
+        FormField(form_frame, 'Username', self.username, 0)
+        FormField(form_frame, 'Password', self.password, 1, show='*')
+
+        Button(form_frame, 'Login', self.app.controller.auth.on_login_clicked, 2)
+        Button(form_frame, 'Create new account', lambda: self.app.show_view("RegisterView"), 2, 2)
 
     def get_form_data(self):
         return {

@@ -1,48 +1,46 @@
-import ttkbootstrap as tb
+import customtkinter as ct
 
 from central_bank_of_yemen.controllers.app_controller import AppController
 from central_bank_of_yemen.views.login_view import LoginView
+from .settings import *
+
 from central_bank_of_yemen.views.register_view import RegisterView
-from central_bank_of_yemen.views.user_dashboard_view import UserDashboardView
 
 
-class App(tb.Window):
-    WIDTH = 800
-    HEIGHT = 950
-    VIEWS = (RegisterView, LoginView, UserDashboardView)
+class App(ct.CTk):
 
     def __init__(self):
         super().__init__()
         self.controller = AppController(self)
-        self.frames = {}
+        self.views = {}
 
         self.iconbitmap('../app.ico')
         self.title('Central Bank of Yemen')
 
         self.center_window()
-        self.minsize(App.WIDTH, App.HEIGHT)
+        self.minsize(WIDTH, HEIGHT)
 
-        container = tb.Frame(self)
-        container.pack(fill="both", expand=True, padx=50, pady=25)
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
+        container = ct.CTkFrame(self)
+        container.pack(fill="both", expand=True, padx=32, pady=32)
+        container.columnconfigure(0, weight=1)
+        container.rowconfigure(0, weight=1)
 
-        for F in App.VIEWS:
-            class_name = F.__name__
-            frame = F(container, self)
-            self.frames[class_name] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
+        for v in (LoginView, RegisterView):
+            view = v(container, self)
+            self.views[v.__name__] = view
+            view.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame('LoginView')
+        self.show_view('LoginView')
 
-    def show_frame(self, class_frame_name):
-        self.frames[class_frame_name].tkraise()
+    def show_view(self, view):
+        if view in self.views:
+            self.views[view].tkraise()
 
     def center_window(self):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
-        left = int(screen_width / 2 - App.WIDTH / 2)
-        top = int(screen_height / 2 - App.HEIGHT / 2)
+        left = int(screen_width / 2 - WIDTH / 2)
+        top = int(screen_height / 2 - HEIGHT / 2)
 
-        self.geometry(f"{App.WIDTH}x{App.HEIGHT}+{left}+{top - 50}")
+        self.geometry(f"{WIDTH}x{HEIGHT}+{left}+{top}")
